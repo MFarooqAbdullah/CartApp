@@ -1,0 +1,97 @@
+<div class="card" *ngIf="isLoading">
+  <h4 class="card-header">Loading...</h4>
+  <div class="card-block text-xs-center">
+    <i class="fa fa-circle-o-notch fa-spin fa-3x"></i>
+  </div>
+</div>
+
+
+<div class="row hidden-xs-down">
+  <h1 class="shopping-head"> ADD PRODUCTS TO YOUR BAG </h1>
+</div>
+
+<div class="col-md-12 col-xs-12 header-border">
+  <div class="row">
+    <div class="col-xs-12 hidden-md-up"> SELECT PRODUCTS TO YOUR BAG </div>
+    <div class="col-md-4 col-xs-12 align-right"><span *ngIf="products"> {{products.length}} </span>PRODUCTS</div>
+    <div class="col-md-8 hidden-xs-down">
+      <div class="col-md-6 col-xs-6"> </div>
+      <div class="col-md-2 col-xs-2 cell-size"> </div>
+      <div class="col-md-2 col-xs-2 cell-qty"> </div>
+    </div>
+  </div>
+</div>
+
+<div class="row vspace">
+  <div class="col-md-12 col-xs-12 rowCover" *ngFor="let product of products; let index=index; let odd=odd; let even=even;"
+    [ngClass]="{ odd: odd, even: even }">
+
+    <div class="row rowBorder hidden-xs-down">
+      <div class="col-md-3"><img src="/assets/{{product.image}}" style="width:160px;" /></div>
+      <div class="col-md-9">
+
+        <div class="row">
+          <div class="col-md-6 prod-name"> {{product.name | uppercase}} </div>
+          <div class="col-md-2"> </div>
+          <div class="col-md-2"> </div>
+          <div class="col-md-2 price-text"> <span class="prod-currency">{{product.p_currency}}</span> <span class="price-value">$
+              {{product.price}}</span></div>
+        </div>
+        <div class="row">
+
+        </div>
+        <div class="row prod-action">
+          <a id="neworder" title="Add Product" (click)="addToCart(product);" style="text-decoration:underline" class="link">ADD
+            TO CART</a>
+          <a id="neworder" title="Add Product" (click)="preview(product);" style="text-decoration:underline" class="link">Preview</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<notifier-container></notifier-container>
+<ngx-smart-modal #myModal identifier="myModal">
+  <table class="modal-table">
+    <tr>
+      <td>
+
+        <div class="modal-prod-name"> <span class="modal-name">{{ modalname | uppercase }}</span></div>
+
+        <div class="modal-price-text"><span class="modal-prod-currency"> $</span> <span class="modal-price-value">
+            {{ productprice }}</span> </div>
+        <div class="modal-center">
+          Quantity:
+          <select [(ngModel)]="productQty">
+            <option *ngFor="let qty of [1,2,3,4,5]" value={{qty}}>{{qty}}</option>
+          </select>
+        </div>
+      </td>
+      <td>
+        <div style="display:inline-block;text-align:center">
+          <img src="/assets/{{imagepath}}" style="width:160px; margin: -10px 70px;" />
+        </div>
+      </td>
+    </tr>
+    <div class="modal-center"><button class="btn btn-primary" type="button" (click)="closeModal();addProduct(product)">ADD
+        TO BAG</button></div>
+  </table>
+</ngx-smart-modal>
+
+<ngx-smart-modal #previewModal identifier="previewModal">
+  <h4> Description </h4>
+  <table class="modal-table">
+    <tr>
+      <td>
+        <div class="modal-prod-name"> <span class="modal-name">{{ modalname | uppercase }}</span></div>
+
+        <div class="modal-price-text"><span class="modal-prod-currency"> $</span> <span class="modal-price-value">
+            {{ productprice }}</span> </div>
+      </td>
+      <td>
+        <div style="display:inline-block;text-align:center">
+          <img src="/assets/{{imagepath}}" style="width:160px; margin: -10px 70px;" />
+        </div>
+      </td>
+    </tr>
+  </table>
+</ngx-smart-modal>

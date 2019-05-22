@@ -1,0 +1,21 @@
+<div class="container">
+  <nav class="navbar navbar-dark bg-inverse nav-head">
+    <div class="nav navbar-nav" style="float:left"> <img src="/assets/cart.ico" alt="" height="40px" width="50px"> <span
+        class="heading">  
+          <h1 class="shopping-head">Shopping Cart </h1>
+      </span> </div>
+    <div class="nav navbar-nav" style="float:right">
+      <a routerLink="/" class="nav-item nav-link" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}">
+        <i class="fa fa-list btn btn-primary" style="border-radius: 1.25rem; margin: 4px;">Dashboard</i>
+      </a>
+      <span>
+        <a routerLink="/order" class="nav-item nav-link" routerLinkActive="active">
+          <i class="fa fa-shopping-cart btn btn-primary" style="border-radius: 1.25rem; margin: 4px;">Cart</i>
+        </a>
+      </span>
+    </div>
+  </nav>
+
+  <router-outlet></router-outlet>
+
+</div>
